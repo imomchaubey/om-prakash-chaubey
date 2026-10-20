@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0d0d0d;
+  --surface: #141414;
+  --surface-2: #1a1a1a;
+  --border: rgba(255, 255, 255, 0.1);
+  --text: #ffffff;
+  --text-muted: #a3a3a3;
+  --accent: #ff6b00;
+  --accent-hover: #ff8533;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border-subtle: var(--border);
+  --color-text-primary: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-size: clamp(1rem, 0.96rem + 0.18vw, 1.125rem);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Fluid Typography Helpers */
+.heading-h1 {
+  font-size: clamp(2.5rem, 1.8rem + 3vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.heading-h2 {
+  font-size: clamp(1.75rem, 1.45rem + 1.25vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+/* Accessible focus ring (2px accent + offset) */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Container & Section Spacing Tokens */
+.section-container {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .section-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.section-spacing {
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+
+@media (min-width: 1024px) {
+  .section-spacing {
+    padding-top: 96px;
+    padding-bottom: 96px;
+  }
+}
+
+/* CSS-only angled dark background panels with faint lighter edges (matching reference design) */
+.hero-angled-bg {
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(
+      115deg,
+      rgba(26, 26, 26, 0.72) 0%,
+      rgba(20, 20, 20, 0.45) 36%,
+      rgba(255, 255, 255, 0.04) 36.15%,
+      transparent 36.4%
+    ),
+    linear-gradient(
+      -62deg,
+      rgba(26, 26, 26, 0.68) 0%,
+      rgba(20, 20, 20, 0.35) 28%,
+      rgba(255, 255, 255, 0.035) 28.15%,
+      transparent 28.4%
+    );
+}
+
+/* Lenis smooth scroll recommended CSS */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
