@@ -21,7 +21,7 @@ export default function NotFoundPage(): React.JSX.Element {
         </p>
         <Link
           href="/"
-          className="mt-8 inline-flex items-center gap-2 rounded-[10px] bg-accent px-6 py-3 text-sm font-bold text-bg transition-colors hover:bg-accent-hover"
+          className="hover-lift mt-8 inline-flex min-h-[44px] items-center gap-2 rounded-[10px] bg-accent px-6 py-3 text-sm font-bold text-bg transition-all hover:bg-accent-hover active:scale-[0.98]"
         >
           <ArrowLeft className="h-4 w-4" aria-hidden="true" />
           <span>Return Home</span>

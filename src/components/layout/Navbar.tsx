@@ -152,8 +152,8 @@ export function Navbar(): React.JSX.Element {
         <a
           href="#home"
           onClick={(e) => handleNavClick(e, "#home", "home")}
-          aria-label="Om Prakash Chaubey — Back to top"
-          className="text-2xl font-bold tracking-tight text-text-primary transition-opacity hover:opacity-90"
+          aria-label="OM. — Om Prakash Chaubey Home"
+          className="inline-flex min-h-[44px] min-w-[44px] items-center text-2xl font-bold tracking-tight text-text-primary transition-opacity hover:opacity-90 active:opacity-80"
         >
           <span>{siteConfig.logoPrefix}</span>
           <span className="text-accent">{siteConfig.logoDot}</span>
@@ -161,7 +161,7 @@ export function Navbar(): React.JSX.Element {
 
         {/* Center: Desktop Navigation Links */}
         <nav aria-label="Primary navigation" className="hidden md:block">
-          <ul className="flex items-center gap-8">
+          <ul className="flex items-center gap-6">
             {siteConfig.navLinks.map((link) => {
               const isActive = activeSection === link.sectionId;
               return (
@@ -172,10 +172,10 @@ export function Navbar(): React.JSX.Element {
                       handleNavClick(e, link.href, link.sectionId)
                     }
                     aria-current={isActive ? "location" : undefined}
-                    className={`text-base transition-colors ${
+                    className={`inline-flex min-h-[44px] items-center rounded-[8px] px-2.5 text-base transition-colors ${
                       isActive
                         ? "font-bold text-accent"
-                        : "font-medium text-text-muted hover:text-text-primary"
+                        : "font-medium text-text-muted hover:text-text-primary active:text-accent"
                     }`}
                   >
                     {link.label}
@@ -191,7 +191,7 @@ export function Navbar(): React.JSX.Element {
           <a
             href="#contact"
             onClick={(e) => handleNavClick(e, "#contact", "contact")}
-            className="inline-flex items-center justify-center rounded-[10px] bg-accent px-6 py-2.5 text-sm font-bold text-bg transition-colors hover:bg-accent-hover active:scale-[0.99]"
+            className="inline-flex min-h-[44px] items-center justify-center rounded-[10px] bg-accent px-6 py-2.5 text-sm font-bold text-bg transition-all hover:-translate-y-0.5 hover:bg-accent-hover active:translate-y-0 active:scale-[0.99]"
           >
             Hire Me
           </a>
@@ -238,7 +238,7 @@ export function Navbar(): React.JSX.Element {
                 setMobileMenuOpen(false);
                 menuButtonRef.current?.focus();
               }}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-[8px] border border-border-subtle bg-surface-2 text-text-primary transition-colors hover:border-accent hover:text-accent"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-[8px] border border-border-subtle bg-surface-2 text-text-primary transition-colors hover:border-accent hover:text-accent active:scale-[0.98]"
             >
               <X className="h-4 w-4" aria-hidden="true" />
             </button>
@@ -256,7 +256,7 @@ export function Navbar(): React.JSX.Element {
                         handleNavClick(e, link.href, link.sectionId)
                       }
                       aria-current={isActive ? "location" : undefined}
-                      className={`block rounded-[10px] px-4 py-2.5 text-base transition-colors ${
+                      className={`flex min-h-[44px] items-center rounded-[10px] px-4 py-2.5 text-base transition-colors ${
                         isActive
                           ? "bg-surface-2 font-bold text-accent"
                           : "font-medium text-text-muted hover:bg-surface-2 hover:text-text-primary"
@@ -273,7 +273,7 @@ export function Navbar(): React.JSX.Element {
               <a
                 href="#contact"
                 onClick={(e) => handleNavClick(e, "#contact", "contact")}
-                className="flex w-full items-center justify-center rounded-[10px] bg-accent px-6 py-3 text-sm font-bold text-bg transition-colors hover:bg-accent-hover"
+                className="flex min-h-[44px] w-full items-center justify-center rounded-[10px] bg-accent px-6 py-3 text-sm font-bold text-bg transition-colors hover:bg-accent-hover active:scale-[0.99]"
               >
                 Hire Me
               </a>

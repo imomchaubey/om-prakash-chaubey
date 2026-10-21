@@ -21,7 +21,11 @@ function renderSocialIcon(platform: SocialPlatform): React.JSX.Element {
   }
 }
 
-export function Hero(): React.JSX.Element {
+interface HeroProps {
+  readonly hasResumePdf?: boolean;
+}
+
+export function Hero({ hasResumePdf = true }: HeroProps): React.JSX.Element {
   const { scrollTo } = useLenisScroll();
   const totalProjects = getTotalProjectCount();
   const totalSkillsAndTools = getUniqueTechnologyCount();
@@ -67,8 +71,8 @@ export function Hero(): React.JSX.Element {
               {profileData.name}
             </p>
 
-            {/* Primary H1 (the only h1 on the page, large bold orange) */}
-            <h1 className="heading-h1 mt-2 text-accent">
+            {/* Primary H1 (the only h1 on the page, large bold orange with subtle slow shimmer) */}
+            <h1 className="heading-h1 hero-title-shimmer mt-2 text-accent">
               {profileData.roleTitle}
             </h1>
 
@@ -77,7 +81,7 @@ export function Hero(): React.JSX.Element {
               {profileData.valueStatement}
             </p>
 
-            {/* Circular Social Icons with subtle borders */}
+            {/* Circular Social Icons with subtle borders (44x44px touch targets) */}
             <ul
               aria-label="Social media profiles"
               className="mt-6 flex items-center gap-3.5"
@@ -89,7 +93,7 @@ export function Hero(): React.JSX.Element {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.ariaLabel}
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border-subtle bg-surface text-text-muted transition-all hover:border-accent hover:bg-surface-2 hover:text-text-primary"
+                    className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border-subtle bg-surface text-text-muted transition-all hover:-translate-y-0.5 hover:border-accent hover:bg-surface-2 hover:text-text-primary active:translate-y-0"
                   >
                     {renderSocialIcon(social.platform)}
                   </a>
@@ -97,26 +101,36 @@ export function Hero(): React.JSX.Element {
               ))}
             </ul>
 
-            {/* Two Buttons Side-by-Side */}
+            {/* Two Buttons Side-by-Side (minimum 44px height) */}
             <div className="mt-8 flex flex-row flex-wrap items-center gap-3.5 sm:gap-4">
               <a
                 href="#projects"
                 onClick={handleViewProjectsClick}
-                className="inline-flex items-center gap-2 rounded-[10px] bg-accent px-5 py-3 text-sm font-bold text-bg transition-colors hover:bg-accent-hover active:scale-[0.99] sm:px-7 sm:py-3.5"
+                className="inline-flex min-h-[44px] items-center gap-2 rounded-[10px] bg-accent px-5 py-3 text-sm font-bold text-bg transition-all hover:-translate-y-0.5 hover:bg-accent-hover active:translate-y-0 active:scale-[0.99] sm:px-7 sm:py-3.5"
               >
                 <span>View Projects</span>
                 <ArrowDownRight className="h-4 w-4" aria-hidden="true" />
               </a>
 
-              <a
-                href={siteConfig.resumePath}
-                download
-                aria-label="Download Om Prakash Chaubey Resume PDF"
-                className="inline-flex items-center gap-2 rounded-[10px] border border-text-muted/50 bg-transparent px-5 py-3 text-sm font-semibold text-text-primary transition-colors hover:border-text-primary hover:bg-surface-2 active:scale-[0.99] sm:px-7 sm:py-3.5"
-              >
-                <Download className="h-4 w-4 text-text-muted" aria-hidden="true" />
-                <span>Download CV</span>
-              </a>
+              {hasResumePdf ? (
+                <a
+                  href={siteConfig.resumePath}
+                  download
+                  aria-label="Download CV (Om Prakash Chaubey PDF)"
+                  className="inline-flex min-h-[44px] items-center gap-2 rounded-[10px] border border-text-muted/50 bg-transparent px-5 py-3 text-sm font-semibold text-text-primary transition-all hover:-translate-y-0.5 hover:border-text-primary hover:bg-surface-2 active:translate-y-0 active:scale-[0.99] sm:px-7 sm:py-3.5"
+                >
+                  <Download className="h-4 w-4 text-text-muted" aria-hidden="true" />
+                  <span>Download CV</span>
+                </a>
+              ) : (
+                <span
+                  role="status"
+                  className="inline-flex min-h-[44px] items-center gap-2 rounded-[10px] border border-border-subtle bg-surface px-5 py-3 text-sm font-medium text-text-muted sm:px-7 sm:py-3.5"
+                >
+                  <Download className="h-4 w-4 text-text-muted/70" aria-hidden="true" />
+                  <span>CV available on request</span>
+                </span>
+              )}
             </div>
 
             {/* Stats Card with Rounded Dark Surface and Thin Vertical Dividers */}
@@ -124,31 +138,31 @@ export function Hero(): React.JSX.Element {
               aria-label="Portfolio key statistics"
               className="mt-10 grid w-full max-w-xl grid-cols-1 divide-y divide-border-subtle rounded-[12px] border border-border-subtle bg-surface/95 p-5 shadow-xl sm:grid-cols-3 sm:divide-x sm:divide-y-0 sm:p-6"
             >
-              <div className="pb-4 sm:pr-5 sm:pb-0">
-                <dd className="text-2xl font-bold tracking-tight text-accent sm:text-3xl">
-                  {totalProjects}
-                </dd>
+              <div className="flex flex-col-reverse pb-4 sm:pr-5 sm:pb-0">
                 <dt className="mt-1 text-sm font-medium text-text-primary/90">
                   {profileData.headlineStats.projectsLabel}
                 </dt>
+                <dd className="text-2xl font-bold tracking-tight text-accent sm:text-3xl">
+                  {totalProjects}
+                </dd>
               </div>
 
-              <div className="py-4 sm:px-5 sm:py-0">
-                <dd className="text-2xl font-bold tracking-tight text-accent sm:text-3xl">
-                  {totalSkillsAndTools}
-                </dd>
+              <div className="flex flex-col-reverse py-4 sm:px-5 sm:py-0">
                 <dt className="mt-1 text-sm font-medium text-text-primary/90">
                   {profileData.headlineStats.skillsLabel}
                 </dt>
+                <dd className="text-2xl font-bold tracking-tight text-accent sm:text-3xl">
+                  {totalSkillsAndTools}
+                </dd>
               </div>
 
-              <div className="pt-4 sm:pt-0 sm:pl-5">
-                <dd className="text-2xl font-bold tracking-tight text-accent sm:text-3xl">
-                  {profileData.headlineStats.highlightValue}
-                </dd>
+              <div className="flex flex-col-reverse pt-4 sm:pt-0 sm:pl-5">
                 <dt className="mt-1 text-sm font-medium text-text-primary/90">
                   {profileData.headlineStats.highlightLabel}
                 </dt>
+                <dd className="text-2xl font-bold tracking-tight text-accent sm:text-3xl">
+                  {profileData.headlineStats.highlightValue}
+                </dd>
               </div>
             </dl>
           </div>
@@ -169,7 +183,7 @@ export function Hero(): React.JSX.Element {
                   alt={profileData.portraitAlt}
                   fill
                   priority
-                  sizes="(max-width: 640px) 300px, (max-width: 1024px) 370px, 430px"
+                  sizes="(max-width: 640px) 140px, (max-width: 1024px) 360px, 420px"
                   className="object-contain object-bottom drop-shadow-[0_18px_32px_rgba(0,0,0,0.85)]"
                 />
               </div>

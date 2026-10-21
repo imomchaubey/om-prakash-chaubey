@@ -31,12 +31,6 @@ html {
   scroll-behavior: smooth;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-}
-
 body {
   background-color: var(--bg);
   color: var(--text);
@@ -62,10 +56,89 @@ body {
   letter-spacing: -0.015em;
 }
 
-/* Accessible focus ring (2px accent + offset) */
+/* Accessible focus ring (2px accent + offset) visible across all dark/orange surfaces */
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
+}
+
+/* Instant keyboard focus reveal: ensures Tab navigation never lands on a dimmed or delayed element */
+[data-scroll-reveal]:focus-within {
+  opacity: 1 !important;
+  transform: translateY(0px) !important;
+  transition-duration: 0s !important;
+  transition-delay: 0s !important;
+}
+
+/* Interactive button/card lift micro-interaction (transform + opacity only) */
+.hover-lift {
+  transition:
+    transform 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.hover-lift:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.hover-lift:active:not(:disabled) {
+  transform: translateY(0px) scale(0.98);
+}
+
+/* Signature Element 1: Slow orange-tone shimmer on Hero H1 title.
+   Uses a GPU-friendly pseudo-element transform overlay so only transform/opacity animate,
+   and every color stop stays between #FF6B00 (6.81:1 on #0D0D0D) and #FFA347 (9.65:1 on #0D0D0D). */
+.hero-title-shimmer {
+  position: relative;
+  display: inline-block;
+  color: var(--accent);
+  background-image: linear-gradient(
+    110deg,
+    #ff6b00 0%,
+    #ff8533 35%,
+    #ffa347 50%,
+    #ff8533 65%,
+    #ff6b00 100%
+  );
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: heroOrangeShimmer 9s ease-in-out 3s infinite alternate;
+}
+
+@keyframes heroOrangeShimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Signature Element 2: Cursor-following soft spotlight on project cards
+   Updated via requestAnimationFrame; disabled on touch devices and reduced motion */
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.spotlight-card::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: var(--spotlight-opacity, 0);
+  transition: opacity 250ms ease;
+  background: radial-gradient(
+    420px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
+    rgba(255, 107, 0, 0.11),
+    transparent 65%
+  );
 }
 
 /* Container & Section Spacing Tokens */
@@ -133,4 +206,58 @@ html.lenis body {
 
 .lenis.lenis-stopped {
   overflow: hidden;
+}
+
+/* Strict Reduced-Motion Override:
+   No scroll-reveal, no shimmer, no hover transforms, no smooth scrolling, instant state changes */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .hero-title-shimmer {
+    animation: none !important;
+    background-image: none !important;
+    -webkit-text-fill-color: var(--accent) !important;
+    color: var(--accent) !important;
+  }
+
+  .spotlight-card::before {
+    display: none !important;
+    opacity: 0 !important;
+  }
+
+  .hover-lift:hover,
+  .hover-lift:active {
+    transform: none !important;
+  }
+
+  [data-scroll-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Forced-Colors (Windows High Contrast) Mode Override:
+   Solid CanvasText/LinkText color, no gradient on hero title */
+@media (forced-colors: active) {
+  .hero-title-shimmer {
+    forced-color-adjust: auto;
+    animation: none !important;
+    background-image: none !important;
+    -webkit-background-clip: border-box !important;
+    background-clip: border-box !important;
+    -webkit-text-fill-color: CanvasText !important;
+    color: CanvasText !important;
+  }
 }

@@ -1,7 +1,7 @@
 export type SkillCategory =
   | "Languages"
   | "AI & ML"
-  | "Data & Analysis"
+  | "Data Science & Analysis"
   | "Backend & Cloud"
   | "Frontend";
 
@@ -31,7 +31,7 @@ export const skillGroups: ReadonlyArray<SkillGroup> = [
     ],
   },
   {
-    category: "Data & Analysis",
+    category: "Data Science & Analysis",
     items: [
       "Pandas",
       "NumPy",

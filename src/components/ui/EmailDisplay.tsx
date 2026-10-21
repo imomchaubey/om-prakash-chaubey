@@ -53,15 +53,14 @@ export function EmailDisplay({
       {email ? (
         <a
           href={`mailto:${email}`}
-          className="inline-flex items-center gap-2 text-sm font-medium text-text-muted transition-colors hover:text-accent"
-          aria-label={`Send an email to ${email}`}
+          className="inline-flex min-h-[44px] min-w-[196px] items-center gap-2 rounded-[8px] px-1 text-sm font-medium text-text-muted transition-colors hover:text-accent active:opacity-80"
         >
-          <Mail className="h-4 w-4 text-accent" aria-hidden="true" />
+          <Mail className="h-4 w-4 shrink-0 text-accent" aria-hidden="true" />
           <span>{email}</span>
         </a>
       ) : (
-        <span className="inline-flex items-center gap-2 text-sm text-text-muted">
-          <Mail className="h-4 w-4 text-accent" aria-hidden="true" />
+        <span className="inline-flex min-h-[44px] min-w-[196px] items-center gap-2 px-1 text-sm font-medium text-text-muted">
+          <Mail className="h-4 w-4 shrink-0 text-accent" aria-hidden="true" />
           <span>Loading email…</span>
         </span>
       )}
@@ -73,8 +72,8 @@ export function EmailDisplay({
             void handleCopy();
           }}
           disabled={!email}
-          aria-label={copied ? "Email address copied" : "Copy email address"}
-          className="inline-flex items-center gap-1.5 rounded-full border border-border-subtle bg-surface-2 px-3 py-1 text-xs font-medium text-text-primary transition-colors hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-50"
+          aria-label={copied ? "Copied email address" : "Copy email address"}
+          className="inline-flex min-h-[44px] items-center gap-1.5 rounded-full border border-border-subtle bg-surface-2 px-4 py-2 text-xs font-medium text-text-primary transition-all hover:-translate-y-0.5 hover:border-accent hover:text-accent active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {copied ? (
             <>

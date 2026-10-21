@@ -8,6 +8,9 @@ export interface SiteConfig {
   readonly siteUrl: string;
   readonly logoPrefix: string;
   readonly logoDot: string;
+  readonly themeColor: string;
+  readonly seoDescription: string;
+  readonly seoKeywords: ReadonlyArray<string>;
   readonly emailParts: {
     readonly user: string;
     readonly domain: string;
@@ -20,6 +23,23 @@ export const siteConfig: SiteConfig = {
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL?.trim() || "http://localhost:3000",
   logoPrefix: "OM",
   logoDot: ".",
+  themeColor: "#0D0D0D",
+  seoDescription:
+    "Om Prakash Chaubey is a Full-Stack and AI Engineer in Patiala, India, building Python, Next.js, FastAPI, LangGraph and MLOps projects. Open to internships.",
+  seoKeywords: [
+    "Full-Stack Developer",
+    "AI Engineer",
+    "Machine Learning",
+    "Python",
+    "React",
+    "Next.js",
+    "Agentic AI",
+    "LangGraph",
+    "MLOps",
+    "Data Science",
+    "India",
+    "Patiala",
+  ],
   // Stored in two parts and assembled on the client to reduce scraper spam.
   // Never include phone number anywhere in source or metadata.
   emailParts: {

@@ -35,23 +35,20 @@ export function ProjectScreenshot({
           className="pointer-events-none absolute -top-12 -right-12 h-40 w-40 rounded-full bg-accent/10 blur-3xl"
         />
 
-        <div className="relative z-10 flex items-center gap-2">
-          <span
-            aria-hidden="true"
-            className="h-2 w-2 rounded-full bg-accent/80"
-          />
+        <div aria-hidden="true" className="relative z-10 flex items-center gap-2">
+          <span className="h-2 w-2 rounded-full bg-accent/80" />
           <span className="text-xs font-medium tracking-wider text-text-muted uppercase">
             System Overview
           </span>
         </div>
 
-        <div className="relative z-10 my-auto py-3">
+        <div aria-hidden="true" className="relative z-10 my-auto py-3">
           <p className="text-lg font-bold tracking-tight text-text-primary sm:text-xl">
             {title}
           </p>
         </div>
 
-        <div className="relative z-10 flex flex-wrap gap-1.5">
+        <div aria-hidden="true" className="relative z-10 flex flex-wrap gap-1.5">
           {stack.map((tech) => (
             <span
               key={tech}

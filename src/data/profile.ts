@@ -15,6 +15,10 @@ export interface ProfileData {
   readonly greeting: string;
   readonly name: string;
   readonly location: string;
+  readonly address: {
+    readonly addressLocality: string;
+    readonly addressCountry: string;
+  };
   readonly roleTitle: string;
   readonly availabilityBadge: string;
   readonly valueStatement: string;
@@ -35,10 +39,14 @@ export const profileData: ProfileData = {
   greeting: "Hi, I'm",
   name: "Om Prakash Chaubey",
   location: "Patiala, Punjab, India",
+  address: {
+    addressLocality: "Patiala",
+    addressCountry: "IN",
+  },
   roleTitle: "Full-Stack & AI Engineer",
   availabilityBadge: "Open to internships & entry-level roles",
   valueStatement:
-    "B.Tech Computer Science student at Thapar Institute building full-stack web apps, LangGraph AI agents, and ML pipelines.",
+    "Full-Stack Developer and B.Tech Computer Science student at Thapar Institute building web apps, LangGraph AI agents, and ML pipelines.",
   aboutBio: "TODO(about bio, 3–4 sentences from Om)",
   headlineStats: {
     projectsLabel: "Projects",

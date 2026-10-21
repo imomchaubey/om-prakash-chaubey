@@ -57,7 +57,7 @@ export const featuredProjects: ReadonlyArray<FeaturedProject> = [
   {
     slug: "restaurant-ai-agent",
     title: "Autonomous Restaurant AI Agent",
-    summary: "Multi-turn conversational ordering agent.",
+    summary: "Multi-turn conversational ordering system powered by agentic AI.",
     problem: "TODO(problem statement for Autonomous Restaurant AI Agent)",
     approach: "Multi-turn conversational ordering agent built with Python, LangGraph, and LLMs.",
     architecture: "TODO(architecture overview for Autonomous Restaurant AI Agent)",

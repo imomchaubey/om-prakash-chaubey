@@ -5,6 +5,7 @@ import { Send, AlertCircle, CheckCircle2, MapPin } from "lucide-react";
 import { FaGithub, FaLinkedinIn, FaKaggle } from "react-icons/fa6";
 import { profileData, type SocialPlatform } from "@/data/profile";
 import { EmailDisplay } from "@/components/ui/EmailDisplay";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { isTodo } from "@/utils/todo";
 
 function renderSocialIcon(platform: SocialPlatform): React.JSX.Element {
@@ -159,7 +160,7 @@ export function Contact({
       <div className="section-container">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
           {/* Left Column: Direct Contact Details & Social Profiles */}
-          <div className="flex flex-col justify-between lg:col-span-5">
+          <ScrollReveal className="flex flex-col justify-between lg:col-span-5">
             <div>
               <h2 id="heading-contact" className="heading-h2 text-text-primary">
                 Contact
@@ -170,7 +171,7 @@ export function Contact({
                 contact form.
               </p>
 
-              <div className="mt-8 space-y-5 rounded-[12px] border border-border-subtle bg-surface p-6">
+              <div className="mt-8 space-y-5 rounded-[12px] border border-border-subtle bg-surface p-6 transition-colors hover:border-white/20">
                 <div>
                   <h3 className="text-sm font-semibold tracking-wider text-text-muted uppercase">
                     Direct Email
@@ -208,7 +209,7 @@ export function Contact({
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label={social.ariaLabel}
-                          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border-subtle bg-surface-2 text-text-muted transition-colors hover:border-accent hover:text-text-primary"
+                          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border-subtle bg-surface-2 text-text-muted transition-all hover:-translate-y-0.5 hover:border-accent hover:text-text-primary active:translate-y-0"
                         >
                           {renderSocialIcon(social.platform)}
                         </a>
@@ -218,11 +219,11 @@ export function Contact({
                 </div>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Right Column: Accessible Contact Form */}
-          <div className="lg:col-span-7">
-            <div className="rounded-[12px] border border-border-subtle bg-surface p-6 sm:p-8">
+          <ScrollReveal className="lg:col-span-7" delayMs={80}>
+            <div className="rounded-[12px] border border-border-subtle bg-surface p-6 transition-colors hover:border-white/20 sm:p-8">
               <h3 className="text-lg font-semibold text-text-primary">
                 Send a Message
               </h3>
@@ -406,7 +407,7 @@ export function Contact({
                   <button
                     type="submit"
                     disabled={isDisabled}
-                    className="inline-flex items-center justify-center gap-2 rounded-[10px] bg-accent px-7 py-3.5 text-sm font-bold text-bg transition-colors hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-50"
+                    className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-[10px] bg-accent px-7 py-3.5 text-sm font-bold text-bg transition-all hover:-translate-y-0.5 hover:bg-accent-hover active:translate-y-0 active:scale-[0.99] disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     <Send className="h-4 w-4" aria-hidden="true" />
                     <span>
@@ -450,7 +451,7 @@ export function Contact({
                 </div>
               </form>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

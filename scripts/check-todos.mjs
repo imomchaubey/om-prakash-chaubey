@@ -110,10 +110,31 @@ if (!formspreeId || formspreeId.startsWith("TODO")) {
   });
 }
 
+const siteUrl = (
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  envLocal.NEXT_PUBLIC_SITE_URL ||
+  ""
+).trim();
+
+if (
+  !siteUrl ||
+  siteUrl.startsWith("TODO") ||
+  siteUrl.includes("localhost") ||
+  siteUrl.includes("127.0.0.1")
+) {
+  requiredLaunchBlockers.push({
+    key: "siteUrl",
+    reason:
+      "NEXT_PUBLIC_SITE_URL is unset or still points to localhost (must be production HTTPS URL before launch)",
+  });
+}
+
 console.log("=== PORTFOLIO TODO & LAUNCH CHECK ===");
 console.log(`\n1. REQUIRED FOR LAUNCH (${requiredLaunchBlockers.length} unresolved):`);
 if (requiredLaunchBlockers.length === 0) {
-  console.log("   [PASS] All launch-required items (bio, public CV, Formspree ID) are resolved.");
+  console.log(
+    "   [PASS] All launch-required items (bio, public CV, Formspree ID, NEXT_PUBLIC_SITE_URL) are resolved."
+  );
 } else {
   for (const blocker of requiredLaunchBlockers) {
     console.log(`   [BLOCKING - ${blocker.key}] ${blocker.reason}`);
