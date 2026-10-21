@@ -90,15 +90,6 @@ export default function RootLayout({
 }: RootLayoutProps): React.JSX.Element {
   return (
     <html lang="en" className={`${inter.variable} ${inter.className}`}>
-      <head>
-        <link
-          rel="preload"
-          href="/_next/static/media/e4af272ccee01ff0-s.p.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-      </head>
       <body className="min-h-screen bg-bg text-text-primary antialiased selection:bg-accent selection:text-bg">
         <script
           type="application/ld+json"
