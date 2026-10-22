@@ -47,7 +47,8 @@ export const profileData: ProfileData = {
   availabilityBadge: "Open to internships & entry-level roles",
   valueStatement:
     "Full-Stack Developer and B.Tech Computer Science student at Thapar Institute building web apps, LangGraph AI agents, and ML pipelines.",
-  aboutBio: "TODO(about bio, 3–4 sentences from Om)",
+  aboutBio:
+    "I am a pre-final year Computer Science and Engineering student at Thapar Institute, specializing in AI/ML and full-stack web development. I focus on architecting end-to-end solutions that bridge the gap between complex machine learning models and scalable, user-centric applications. My recent technical work spans building autonomous AI agents using LangGraph, deploying containerized MLOps pipelines, and engineering decentralized IoT platforms like De-Insure. I am driven by a passion for leveraging data-driven insights and modern backend frameworks to build robust, impactful software.",
   headlineStats: {
     projectsLabel: "Projects",
     skillsLabel: "Skills & Tools",

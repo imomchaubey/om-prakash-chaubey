@@ -36,10 +36,6 @@ next-env.d.ts
 # workspace raw inputs (never commit)
 _inputs/
 
-# temporary privacy guard: public CV currently copied from _inputs/resume1.pdf (contains phone number)
-# TODO(remove this ignore line after replacing public/Om_Prakash_Chaubey_Resume.pdf with a phone-free version)
-public/Om_Prakash_Chaubey_Resume.pdf
-
 # phase verification screenshots (local inspection only)
 docs/
 
