@@ -20,7 +20,7 @@ For direct contact details and social profiles, please use the **Contact** secti
 
 ## Features
 
-- **Single-Source Typed Data Layer**: All profile details, skills (`36` items across `5` categories), projects (`4` featured and `3` additional), education (`1` degree entry and `5` certifications), and site settings live in typed TypeScript modules under `src/data/`.
+- **Single-Source Typed Data Layer**: All profile details, skills (`35` items across `5` categories), projects (`4` featured and `3` additional), education (`1` degree entry and `5` certifications), and site settings live in typed TypeScript modules under `src/data/`.
 - **Production-Safe Placeholder Gate**: Unfinished optional content fields marked with `TODO` placeholders in `src/data/` are checked by `isTodo()` and `shouldRenderTodoInUi()` in `src/utils/todo.ts` so they are omitted from the production build (`npm run build`) and audited via `npm run check:todos`.
 - **Conditional Case-Study Routing**: Featured projects automatically receive a statically generated `/projects/[slug]` case-study page and `/sitemap.xml` entry via `isProjectCaseStudyEligible()` once their `problem`, `approach`, and `whatILearned` fields contain no `TODO` placeholders and `verifiedResults` has at least one verified metric.
 - **Accessibility**: Built to meet WCAG 2.2 AA; automated axe-core audits report 0 violations. Automated tools cannot prove full conformance. Includes semantic landmarks (`<header>`, `<nav>`, `<main>`, `<section>`, `<footer>`), a skip-to-content link, a focus-trapped mobile navigation drawer, keyboard-accessible controls (`>= 44x44px` targets), and `prefers-reduced-motion: reduce` and `forced-colors: active` support.
@@ -80,7 +80,7 @@ portfolio/
 │   │   ├── profile.ts            # Name, roleTitle, availabilityBadge, valueStatement, aboutBio, headlineStats, socials, spokenLanguages
 │   │   ├── projects.ts           # featuredProjects (4), otherProjects (3) & eligibility helpers
 │   │   ├── site.ts               # siteUrl, logo text, themeColor, seoDescription, seoKeywords, emailParts, resumePath, navLinks
-│   │   └── skills.ts             # skillGroups (36 items across 5 categories) & getUniqueTechnologyCount()
+│   │   └── skills.ts             # skillGroups (35 items across 5 categories) & getUniqueTechnologyCount()
 │   └── utils/
 │       ├── todo.ts               # isTodo() & shouldRenderTodoInUi()
 │       └── types.ts              # Re-exported shared skill types

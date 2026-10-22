@@ -46,7 +46,7 @@ export const skillGroups: ReadonlyArray<SkillGroup> = [
   },
   {
     category: "Backend & Cloud",
-    items: ["FastAPI", "Flask", "Node.js", "WebRTC", "Docker", "CI/CD", "Git"],
+    items: ["FastAPI", "Flask", "Node.js", "Docker", "CI/CD", "Git"],
   },
   {
     category: "Frontend",

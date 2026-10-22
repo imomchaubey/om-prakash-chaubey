@@ -37,22 +37,41 @@ export const featuredProjects: ReadonlyArray<FeaturedProject> = [
   {
     slug: "zoom-clone",
     title: "Zoom Clone",
-    summary: "Full-stack video conferencing.",
-    problem: "TODO(problem statement for Zoom Clone)",
-    approach: "Full-stack video conferencing built with TypeScript, Next.js, FastAPI, and WebRTC.",
-    architecture: "Simplified overview: Next.js frontend, FastAPI backend, WebRTC.",
-    stack: ["TypeScript", "Next.js", "FastAPI", "WebRTC"],
+    summary:
+      "Full-stack Zoom web-client clone: start, join and schedule meetings, with a pre-join camera and microphone preview and host controls in the meeting room.",
+    problem:
+      "Replicate the core Zoom web-client workflows (start, join, schedule and host a meeting) as a full-stack application with a relational backend.",
+    approach:
+      "A Next.js (App Router, Tailwind CSS) frontend talks over a REST/JSON API to a FastAPI backend that validates requests with Pydantic and stores data through SQLAlchemy in a SQLite database. Instant meetings get a generated 11-digit meeting ID and a host record; joining checks that the meeting exists; the pre-join screen uses the browser's getUserMedia API for a camera and microphone preview and mute preferences; scheduled meetings store a topic, description, date, time and duration. The meeting room has a participant grid, a participant panel and host controls (Mute All, remove participant). A startup script seeds the database with demo data.",
+    architecture:
+      "Next.js client -> HTTP/REST/JSON -> FastAPI API (Pydantic validation, CORS) -> SQLAlchemy ORM -> SQLite. Three tables: Users, Meetings (meeting code, title, description, host, instant or scheduled type, status, start time, duration) and Participants (who joined which meeting, display name, host or participant role, join and leave times).",
+    stack: [
+      "TypeScript",
+      "Next.js",
+      "Tailwind CSS",
+      "FastAPI",
+      "Pydantic",
+      "SQLAlchemy",
+      "SQLite",
+    ],
     verifiedResults: [
       {
-        label: "Results",
-        value: "TODO(verified results for Zoom Clone)",
+        label: "Delivered",
+        value:
+          "Instant and scheduled meetings, join by meeting ID, camera and microphone pre-join, host controls (Mute All, remove participant)",
+      },
+      {
+        label: "Scope limits",
+        value:
+          "No authentication (seeded host profile); no multi-user WebRTC media",
       },
     ],
-    whatILearned: "TODO(what I learned for Zoom Clone)",
+    whatILearned:
+      "Scoped the project to the core meeting lifecycle: authentication was replaced by a seeded host profile, and multi-user WebRTC media and signaling were left out because they need dedicated infrastructure beyond the assignment timeline.",
     repoUrl: "https://github.com/imomchaubey/zoom-clone-fullstack",
     demoUrl: null,
     screenshot: "TODO(screenshot for zoom-clone: public/images/projects/zoom-clone.png)",
-    screenshotAlt: "Zoom Clone — full-stack video conferencing",
+    screenshotAlt: "Zoom Clone — start, join and schedule meetings",
   },
   {
     slug: "restaurant-ai-agent",
@@ -79,19 +98,41 @@ export const featuredProjects: ReadonlyArray<FeaturedProject> = [
     slug: "youtube-sentiment-mlops",
     title: "YouTube Sentiment MLOps Pipeline",
     summary:
-      "End-to-end sentiment classification pipeline (TF-IDF features + Logistic Regression) served through a FastAPI service, containerised with Docker and tested with GitHub Actions CI.",
-    problem: "TODO(problem statement for YouTube Sentiment MLOps Pipeline)",
+      "Chrome extension and FastAPI service that classify the sentiment of YouTube comments as positive, neutral or negative with a TF-IDF and Logistic Regression pipeline.",
+    problem:
+      "Understand what viewers think about a YouTube video without reading thousands of comments.",
     approach:
-      "Text is preprocessed with NLTK (stopwords and tokenization), turned into TF-IDF features and classified with Logistic Regression. The model is served through a FastAPI application run by Uvicorn, packaged in a Docker image (Python 3.10), and checked by a GitHub Actions CI workflow.",
-    architecture: "TODO(architecture overview for YouTube Sentiment MLOps Pipeline)",
-    stack: ["Python", "Scikit-learn", "NLTK", "FastAPI", "Docker", "GitHub Actions"],
+      "A Manifest V3 Chrome extension scrapes up to 50 loaded comments from the YouTube page and sends them in a single batch request to a Dockerized FastAPI service. The service cleans the text with a custom NLTK pipeline that keeps negation words, runs it through a TF-IDF (1-2 grams) and Logistic Regression model, and the extension shows the aggregated positive, neutral and negative breakdown. The Dockerfile pre-downloads the NLTK data at build time, and GitHub Actions runs the pytest suite on every push and pull request.",
+    architecture:
+      "Chrome extension (Manifest V3) -> POST /predict_batch -> FastAPI service in Docker -> text cleaning -> TF-IDF + Logistic Regression -> aggregated sentiment shown in the extension.",
+    stack: [
+      "Python",
+      "Scikit-learn",
+      "NLTK",
+      "Pandas",
+      "FastAPI",
+      "Docker",
+      "GitHub Actions",
+      "Pytest",
+      "JavaScript",
+    ],
     verifiedResults: [
       {
-        label: "Results",
-        value: "TODO(confirm details against repo README for YouTube Sentiment MLOps Pipeline)",
+        label: "Quality gates",
+        value:
+          "pytest suite runs on every push and pull request through GitHub Actions",
+      },
+      {
+        label: "Model accuracy / F1",
+        value: "TODO(model accuracy / F1)",
+      },
+      {
+        label: "Training dataset",
+        value: "TODO(training dataset)",
       },
     ],
-    whatILearned: "TODO(what I learned for YouTube Sentiment MLOps Pipeline)",
+    whatILearned:
+      'Chose TF-IDF with Logistic Regression over a heavier deep-learning model for speed and low memory use, kept negation words such as "not" during text cleaning so that "this video is not good" is not read as positive, and used one batch endpoint instead of 50 separate requests.',
     repoUrl: "https://github.com/imomchaubey/youtube-sentiment-mlops",
     demoUrl: null,
     screenshot:
