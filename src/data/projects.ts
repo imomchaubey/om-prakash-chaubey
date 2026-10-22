@@ -69,7 +69,7 @@ export const featuredProjects: ReadonlyArray<FeaturedProject> = [
     whatILearned:
       "Scoped the project to the core meeting lifecycle: authentication was replaced by a seeded host profile, and multi-user WebRTC media and signaling were left out because they need dedicated infrastructure beyond the assignment timeline.",
     repoUrl: "https://github.com/imomchaubey/zoom-clone-fullstack",
-    demoUrl: null,
+    demoUrl: "https://zoom-clone-fullstack-nine.vercel.app",
     screenshot: "TODO(screenshot for zoom-clone: public/images/projects/zoom-clone.png)",
     screenshotAlt: "Zoom Clone — start, join and schedule meetings",
   },
