@@ -56,23 +56,24 @@ export const featuredProjects: ReadonlyArray<FeaturedProject> = [
   },
   {
     slug: "restaurant-ai-agent",
-    title: "Autonomous Restaurant AI Agent",
-    summary: "Multi-turn conversational ordering system powered by agentic AI.",
-    problem: "TODO(problem statement for Autonomous Restaurant AI Agent)",
-    approach: "Multi-turn conversational ordering agent built with Python, LangGraph, and LLMs.",
-    architecture: "TODO(architecture overview for Autonomous Restaurant AI Agent)",
-    stack: ["Python", "LangGraph", "LLMs"],
+    title: "Restaurant Order Agent (LangGraph)",
+    summary: "LangGraph agent that takes a food order, checks stock, then simulates cooking and serving with retries at each stage.",
+    problem: "Explore how a multi-step ordering process (validate the request, extract the order, check stock, cook, serve) with retries and user decisions can be modelled as a LangGraph workflow.",
+    approach: "Built with LangGraph and a Groq-hosted LLM (openai/gpt-oss-120b). The LLM acts as a food-only guardrail and extracts the dish and quantity through Pydantic structured output. The order is checked against a fixed menu and marked confirmed, partial or unavailable; for partial orders the user chooses to accept the available amount or place a new order. Cooking and serving are simulated, with retry limits at each stage, and the LLM writes the apology and success messages.",
+    architecture: "Graph nodes: llm_node -> order_confirm -> user_decision (for partial or unavailable orders) -> cook -> serve. Cooking succeeds 60% of the time with up to 2 attempts; serving succeeds 80% of the time, and a serving failure sends the order back to cook while retries remain. Order, cook and serve retry counters are kept in the typed graph state.",
+    stack: ["Python", "LangGraph", "LangChain", "Groq", "Pydantic"],
     verifiedResults: [
       {
-        label: "Results",
-        value: "TODO(verified results for Autonomous Restaurant AI Agent)",
+        label: "Demo run",
+        value: 'Order "2 pizza" cooked and served successfully (status: complete)',
+        context: "Console demo with simulated cooking and serving",
       },
     ],
-    whatILearned: "TODO(what I learned for Autonomous Restaurant AI Agent)",
+    whatILearned: "Modelling the workflow as a graph with typed state made every retry limit and failure path explicit. The console version waits for the user with input() inside a node; in a real application LangGraph's interrupt mechanism would be the better fit.",
     repoUrl: "https://github.com/imomchaubey/restrunt-ai-agent",
     demoUrl: null,
     screenshot: "TODO(screenshot for restaurant-ai-agent: public/images/projects/restaurant-ai-agent.png)",
-    screenshotAlt: "Autonomous Restaurant AI Agent — multi-turn conversational ordering agent",
+    screenshotAlt: "Restaurant Order Agent (LangGraph) - multi-turn ordering workflow",
   },
   {
     slug: "youtube-sentiment-mlops",
@@ -81,9 +82,9 @@ export const featuredProjects: ReadonlyArray<FeaturedProject> = [
       "End-to-end sentiment classification pipeline (TF-IDF features + Logistic Regression) served through a FastAPI service, containerised with Docker and tested with GitHub Actions CI.",
     problem: "TODO(problem statement for YouTube Sentiment MLOps Pipeline)",
     approach:
-      "End-to-end sentiment classification pipeline (TF-IDF features + Logistic Regression) served through a FastAPI service, containerised with Docker and tested with GitHub Actions CI.",
+      "Text is preprocessed with NLTK (stopwords and tokenization), turned into TF-IDF features and classified with Logistic Regression. The model is served through a FastAPI application run by Uvicorn, packaged in a Docker image (Python 3.10), and checked by a GitHub Actions CI workflow.",
     architecture: "TODO(architecture overview for YouTube Sentiment MLOps Pipeline)",
-    stack: ["Python", "Scikit-learn", "FastAPI", "Docker", "GitHub Actions"],
+    stack: ["Python", "Scikit-learn", "NLTK", "FastAPI", "Docker", "GitHub Actions"],
     verifiedResults: [
       {
         label: "Results",
@@ -101,13 +102,17 @@ export const featuredProjects: ReadonlyArray<FeaturedProject> = [
     slug: "network-anomaly-detection",
     title: "Network Traffic Anomaly Detection",
     summary:
-      "Hybrid classifier combining Isolation Forest decision functions with a Random Forest, using SMOTE oversampling to handle minority attack classes.",
-    problem: "TODO(problem statement for Network Traffic Anomaly Detection)",
+      "Hybrid intrusion-detection pipeline combining K-Means clustering, Isolation Forest anomaly scores and a Random Forest classifier, evaluated on UNSW-NB15 and cross-tested on CIC-IDS2017.",
+    problem: "Traditional intrusion detection systems struggle with evolving attack patterns and with imbalanced attack classes.",
     approach:
-      "Hybrid classifier combining Isolation Forest decision functions with a Random Forest, using SMOTE oversampling to handle minority attack classes. Dataset: UNSW-NB15. Cross-tested on CIC-IDS2017 to analyse domain-adaptation challenges.",
-    architecture: "TODO(architecture overview for Network Traffic Anomaly Detection)",
-    stack: ["Python", "Scikit-learn", "Isolation Forest", "Random Forest", "SMOTE"],
+      "K-Means groups similar network traffic profiles, Isolation Forest generates anomaly scores within each cluster, and a Random Forest uses the original features plus the anomaly score to classify traffic as Normal or Attack. SMOTE oversampling handles class imbalance, and custom ratio features (for example bytes and load ratios between source and destination) capture protocol-specific behaviour. UNSW-NB15 is used for training and validation; the DoS-Wednesday subset of CIC-IDS2017 is used for cross-dataset testing.",
+    architecture: "K-Means clustering -> per-cluster Isolation Forest anomaly score -> Random Forest classifier (original features + anomaly score) -> Normal / Attack. Outputs include PCA cluster plots, ROC curves, confusion matrices and feature-importance plots.",
+    stack: ["Python", "Scikit-learn", "K-Means", "Isolation Forest", "Random Forest", "SMOTE"],
     verifiedResults: [
+      {
+        label: "Evaluation data",
+        value: "UNSW-NB15 (training and validation); CIC-IDS2017 DoS-Wednesday subset (cross-dataset test)",
+      },
       {
         label: "F1-score (UNSW-NB15, attack class)",
         value: "0.96",
@@ -138,7 +143,7 @@ export const featuredProjects: ReadonlyArray<FeaturedProject> = [
         value: "TODO(CIC-IDS2017 cross-test results)",
       },
     ],
-    whatILearned: "TODO(what I learned for Network Traffic Anomaly Detection)",
+    whatILearned: "Cross-testing on CIC-IDS2017 showed how feature alignment affects accuracy when a model trained on UNSW-NB15 is applied to a different network environment (domain adaptation).",
     repoUrl: "https://github.com/imomchaubey/Anamoly_detection_in-_Network",
     demoUrl: null,
     screenshot:

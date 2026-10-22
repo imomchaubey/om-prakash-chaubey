@@ -1,6 +1,6 @@
 # Om Prakash Chaubey — Full-Stack & AI Engineer Portfolio
 
-Personal developer portfolio for **Om Prakash Chaubey** (B.Tech Computer Science & Engineering student at Thapar Institute of Engineering & Technology, Patiala, graduating May 2027). Built with Next.js App Router, React 19, TypeScript, and Tailwind CSS v4 to showcase Full-Stack, Agentic AI, MLOps, and Machine Learning projects.
+Personal developer portfolio for **Om Prakash Chaubey** (B.Tech Computer Science & Engineering student at Thapar Institute of Engineering & Technology, Patiala, graduating May 2027). Built with Next.js App Router, React 19, TypeScript, and Tailwind CSS v4 to showcase Full-Stack, LangGraph, MLOps, and Machine Learning projects.
 
 For direct contact details and social profiles, please use the **Contact** section on the live site.
 
@@ -21,8 +21,8 @@ For direct contact details and social profiles, please use the **Contact** secti
 ## Features
 
 - **Single-Source Typed Data Layer**: All profile details, skills (`36` items across `5` categories), projects (`4` featured and `3` additional), education (`1` degree entry and `5` certifications), and site settings live in typed TypeScript modules under `src/data/`.
-- **Production-Safe TODO Gate**: Unfinished optional content fields marked with `TODO(...)` in `src/data/` are checked by `isTodo()` and `shouldRenderTodoInUi()` in `src/utils/todo.ts` so they are omitted from the production build (`npm run build`) and audited via `npm run check:todos`.
-- **Conditional Case-Study Routing**: Featured projects automatically receive a statically generated `/projects/[slug]` case-study page and `/sitemap.xml` entry via `isProjectCaseStudyEligible()` once their `problem`, `approach`, and `whatILearned` fields contain no `TODO(...)` markers and `verifiedResults` has at least one non-`TODO(...)` metric.
+- **Production-Safe Placeholder Gate**: Unfinished optional content fields marked with `TODO` placeholders in `src/data/` are checked by `isTodo()` and `shouldRenderTodoInUi()` in `src/utils/todo.ts` so they are omitted from the production build (`npm run build`) and audited via `npm run check:todos`.
+- **Conditional Case-Study Routing**: Featured projects automatically receive a statically generated `/projects/[slug]` case-study page and `/sitemap.xml` entry via `isProjectCaseStudyEligible()` once their `problem`, `approach`, and `whatILearned` fields contain no `TODO` placeholders and `verifiedResults` has at least one verified metric.
 - **Accessibility**: Built to meet WCAG 2.2 AA; automated axe-core audits report 0 violations. Automated tools cannot prove full conformance. Includes semantic landmarks (`<header>`, `<nav>`, `<main>`, `<section>`, `<footer>`), a skip-to-content link, a focus-trapped mobile navigation drawer, keyboard-accessible controls (`>= 44x44px` targets), and `prefers-reduced-motion: reduce` and `forced-colors: active` support.
 - **SEO & Metadata**: Next.js Metadata API (`title` template, canonical URLs, Open Graph, Twitter cards), dynamic `1200x630` Open Graph image (`/opengraph-image`), app icons (`32x32` `/icon` and `180x180` `/apple-icon`), `/robots.txt`, `/sitemap.xml`, and `Person` JSON-LD structured data.
 - **Resilient Contact Section**: Client-assembled direct email link with a one-click copy-to-clipboard button in the Contact section of the live site, paired with a Formspree message form (honeypot spam protection, field validation with `aria-describedby` / `role="alert"`, and double-submit protection) controlled by the `NEXT_PUBLIC_FORMSPREE_ID` environment variable. When `NEXT_PUBLIC_FORMSPREE_ID` is not set, the form fields and submit button are rendered in a disabled state with a notice directing visitors to use the direct email options alongside the form.
@@ -108,7 +108,7 @@ Run these commands from the repository root (requires **Node.js 24.x**):
 | `npm run start` | Start the Next.js production server on the built output. |
 | `npm run lint` | Run ESLint across the codebase. |
 | `npm run typecheck` | Run TypeScript compiler type-checking (`tsc --noEmit`). |
-| `npm run check:todos` | List all `TODO(...)` markers in `src/data/` and exit with code `1` if any launch-required item is unresolved. |
+| `npm run check:todos` | List all `TODO` placeholder markers in `src/data/` and exit with code `1` if any launch-required item is unresolved. |
 
 ---
 
@@ -131,9 +131,9 @@ All personal and project content is decoupled from JSX components. Edit the file
 - **`src/data/skills.ts`**: Update `skillGroups` across the 5 categories (`Languages`, `AI & ML`, `Data Science & Analysis`, `Backend & Cloud`, `Frontend`). `getUniqueTechnologyCount()` computes the Hero `"Skills & Tools"` count automatically.
 - **`src/data/projects.ts`**:
   - Update `featuredProjects` (`4` items) and `otherProjects` (`3` items). `getTotalProjectCount()` computes the Hero `"Projects"` count automatically.
-  - To enable a full `/projects/[slug]` case-study page for a featured project (`isProjectCaseStudyEligible()`), replace all `TODO(...)` strings in its `problem`, `approach`, and `whatILearned` fields and ensure `verifiedResults` has at least one non-`TODO(...)` metric.
+  - To enable a full `/projects/[slug]` case-study page for a featured project (`isProjectCaseStudyEligible()`), replace all `TODO` placeholder strings in its `problem`, `approach`, and `whatILearned` fields and ensure `verifiedResults` has at least one verified metric.
   - To add a project screenshot, create the directory `public/images/projects/`, place a `1600x900` PNG at `public/images/projects/<slug>.png`, and set `screenshot: "/images/projects/<slug>.png"`.
-- **`src/data/education.ts`**: Update `educationEntries` (degree, institution, location, period, CGPA) and `certifications` (replace `credentialUrl: "TODO(certificate URLs)"` and set `credentialIsTodo: false` when verification links are ready).
+- **`src/data/education.ts`**: Update `educationEntries` (degree, institution, location, period, CGPA) and `certifications` (replace placeholder `credentialUrl` values and set `credentialIsTodo: false` when verification links are ready).
 - **`src/data/site.ts`**: Update `logoPrefix`, `logoDot`, `themeColor`, `seoDescription`, `seoKeywords`, `emailParts`, `resumePath`, and `navLinks`.
 
 ---
